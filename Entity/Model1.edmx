@@ -1,0 +1,791 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PZDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.Advertisement' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Adv_Code" />
+            <PropertyRef Name="Adv_Name" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Adv_Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Adv_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adv_Script" Type="text" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.Article' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_Title" />
+            <PropertyRef Name="Article_Type" />
+            <PropertyRef Name="Article_ImportDate" />
+            <PropertyRef Name="Article_CreateDate" />
+            <PropertyRef Name="Article_Opr" />
+            <PropertyRef Name="IfDel" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Article_Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Article_Content" Type="text" />
+          <Property Name="Article_Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Article_ImportDate" Type="datetime" Nullable="false" />
+          <Property Name="Article_Pseudonym" Type="varchar" MaxLength="50" />
+          <Property Name="Article_CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Article_MediaUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="Article_Opr" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IfContributor" Type="bit" />
+          <Property Name="IfDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.ArticleComments' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="ArticleComments">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_ID" />
+            <PropertyRef Name="IpAddress" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="ImputDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Article_ID" Type="int" Nullable="false" />
+          <Property Name="Signed" Type="varchar" MaxLength="50" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Content" Type="text" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="1000" />
+          <Property Name="ImputDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.ArticleContributor' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="ArticleContributor">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_ID" />
+            <PropertyRef Name="MediaCode" />
+            <PropertyRef Name="ContributorDate" />
+            <PropertyRef Name="ContributorType" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Article_ID" Type="int" Nullable="false" />
+          <Property Name="MediaCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ContributorDate" Type="datetime" Nullable="false" />
+          <Property Name="ContributorType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Results" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.ArticleType' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_Type" />
+            <PropertyRef Name="Article_TypeName" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Article_Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Article_TypeName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bf_MemberInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MemberInfoCode" Type="varchar" MaxLength="32" />
+          <Property Name="MemberName" Type="varchar" MaxLength="32" />
+          <Property Name="EnglishName" Type="varchar" MaxLength="32" />
+          <Property Name="PYIndex" Type="varchar" MaxLength="32" />
+          <Property Name="MemberInfoClassID" Type="int" />
+          <Property Name="VIP" Type="int" />
+          <Property Name="Sex" Type="varchar" MaxLength="16" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="IDCard" Type="varchar" MaxLength="18" />
+          <Property Name="Address" Type="varchar" MaxLength="256" />
+          <Property Name="Address2" Type="varchar" MaxLength="256" />
+          <Property Name="CheckAddress1" Type="bit" />
+          <Property Name="CheckAddress2" Type="bit" />
+          <Property Name="Postalcode" Type="varchar" MaxLength="16" />
+          <Property Name="Postalcode2" Type="varchar" MaxLength="16" />
+          <Property Name="Mobilephone" Type="varchar" MaxLength="32" />
+          <Property Name="wiki_UserCode" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="32" />
+          <Property Name="Officephone" Type="varchar" MaxLength="32" />
+          <Property Name="Email" Type="varchar" MaxLength="32" />
+          <Property Name="City" Type="varchar" MaxLength="32" />
+          <Property Name="LikeInceptNote" Type="bit" />
+          <Property Name="LikeInceptEmail" Type="bit" />
+          <Property Name="Remark" Type="varchar" MaxLength="256" />
+          <Property Name="FrameID" Type="int" />
+          <Property Name="CreateFrameID" Type="int" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="RefDate" Type="datetime" />
+          <Property Name="BuyerDate" Type="datetime" />
+          <Property Name="MemberDate" Type="datetime" />
+          <Property Name="ExteriorID" Type="varchar" MaxLength="32" />
+          <Property Name="LockFlag" Type="bit" />
+          <Property Name="CreateID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyID" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ImportFlag" Type="int" />
+          <Property Name="ExportFlag" Type="int" />
+          <Property Name="DelFlag" Type="bit" />
+          <Property Name="HQFlag" Type="int" />
+          <Property Name="StoFlag" Type="int" />
+          <Property Name="jobs" Type="varchar" MaxLength="32" />
+          <Property Name="titles" Type="varchar" MaxLength="32" />
+          <Property Name="AccountSum" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PointSum" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="bf_wiki_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromUserName" Type="varchar" MaxLength="100" />
+          <Property Name="ToUserName" Type="varchar" MaxLength="100" />
+          <Property Name="MsgType" Type="varchar" MaxLength="50" />
+          <Property Name="EventName" Type="varchar" MaxLength="50" />
+          <Property Name="Content" Type="varchar" MaxLength="1000" />
+          <Property Name="Recognition" Type="varchar" MaxLength="50" />
+          <Property Name="EventKey" Type="varchar" MaxLength="50" />
+          <Property Name="GetTime" Type="datetime" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.Competence' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="Competence">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RoleCode" />
+            <PropertyRef Name="ModuleCode" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RoleCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModuleCode" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.GuestMsg' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="GuestMsg">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Signed" />
+            <PropertyRef Name="IPAddress" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="ImputDate" />
+            <PropertyRef Name="IfOpen" />
+            <PropertyRef Name="Ifshield" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Signed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Content" Type="text" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="1000" />
+          <Property Name="ImputDate" Type="datetime" Nullable="false" />
+          <Property Name="IfOpen" Type="bit" Nullable="false" />
+          <Property Name="Ifshield" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.MediaInfo' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MediaCode" />
+            <PropertyRef Name="MediaName" />
+            <PropertyRef Name="MediaContact" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="MediaCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MediaName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="MediaContact" Type="text" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.Module' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ModuleName" />
+            <PropertyRef Name="ModuleCode" />
+            <PropertyRef Name="ModuleType" />
+            <PropertyRef Name="IfEffective" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ModuleCode" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ModuleType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModulePicUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="ModuleUrl" Type="varchar" MaxLength="1000" />
+          <Property Name="IfEffective" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'PZDB.dbo.Notice' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Notice_Title" />
+            <PropertyRef Name="Notice_ImportDate" />
+            <PropertyRef Name="Notice_Opr" />
+            <PropertyRef Name="IfDel" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Notice_Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Notice_Content" Type="text" />
+          <Property Name="Notice_ImportDate" Type="datetime" Nullable="false" />
+          <Property Name="Notice_Opr" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IfDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PZDBModelStoreContainer">
+          <EntitySet Name="bf_MemberInfo" EntityType="Self.bf_MemberInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bf_wiki_Message" EntityType="Self.bf_wiki_Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Advertisement].[ID] AS [ID], 
+    [Advertisement].[Adv_Code] AS [Adv_Code], 
+    [Advertisement].[Adv_Name] AS [Adv_Name], 
+    [Advertisement].[Adv_Script] AS [Adv_Script]
+    FROM [dbo].[Advertisement] AS [Advertisement]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Article" EntityType="Self.Article" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Article].[ID] AS [ID], 
+    [Article].[Article_Title] AS [Article_Title], 
+    [Article].[Article_Content] AS [Article_Content], 
+    [Article].[Article_Type] AS [Article_Type], 
+    [Article].[Article_ImportDate] AS [Article_ImportDate], 
+    [Article].[Article_Pseudonym] AS [Article_Pseudonym], 
+    [Article].[Article_CreateDate] AS [Article_CreateDate], 
+    [Article].[Article_MediaUrl] AS [Article_MediaUrl], 
+    [Article].[Article_Opr] AS [Article_Opr], 
+    [Article].[IfContributor] AS [IfContributor], 
+    [Article].[IfDel] AS [IfDel]
+    FROM [dbo].[Article] AS [Article]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ArticleComments" EntityType="Self.ArticleComments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArticleComments].[ID] AS [ID], 
+    [ArticleComments].[Article_ID] AS [Article_ID], 
+    [ArticleComments].[Signed] AS [Signed], 
+    [ArticleComments].[IpAddress] AS [IpAddress], 
+    [ArticleComments].[Content] AS [Content], 
+    [ArticleComments].[Contact] AS [Contact], 
+    [ArticleComments].[ImputDate] AS [ImputDate]
+    FROM [dbo].[ArticleComments] AS [ArticleComments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ArticleContributor" EntityType="Self.ArticleContributor" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArticleContributor].[ID] AS [ID], 
+    [ArticleContributor].[Article_ID] AS [Article_ID], 
+    [ArticleContributor].[MediaCode] AS [MediaCode], 
+    [ArticleContributor].[ContributorDate] AS [ContributorDate], 
+    [ArticleContributor].[ContributorType] AS [ContributorType], 
+    [ArticleContributor].[Results] AS [Results]
+    FROM [dbo].[ArticleContributor] AS [ArticleContributor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ArticleType" EntityType="Self.ArticleType" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArticleType].[ID] AS [ID], 
+    [ArticleType].[Article_Type] AS [Article_Type], 
+    [ArticleType].[Article_TypeName] AS [Article_TypeName]
+    FROM [dbo].[ArticleType] AS [ArticleType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Competence" EntityType="Self.Competence" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Competence].[ID] AS [ID], 
+    [Competence].[RoleCode] AS [RoleCode], 
+    [Competence].[ModuleCode] AS [ModuleCode]
+    FROM [dbo].[Competence] AS [Competence]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GuestMsg" EntityType="Self.GuestMsg" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GuestMsg].[ID] AS [ID], 
+    [GuestMsg].[Signed] AS [Signed], 
+    [GuestMsg].[IPAddress] AS [IPAddress], 
+    [GuestMsg].[Content] AS [Content], 
+    [GuestMsg].[Contact] AS [Contact], 
+    [GuestMsg].[ImputDate] AS [ImputDate], 
+    [GuestMsg].[IfOpen] AS [IfOpen], 
+    [GuestMsg].[Ifshield] AS [Ifshield]
+    FROM [dbo].[GuestMsg] AS [GuestMsg]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MediaInfo" EntityType="Self.MediaInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MediaInfo].[ID] AS [ID], 
+    [MediaInfo].[MediaCode] AS [MediaCode], 
+    [MediaInfo].[MediaName] AS [MediaName], 
+    [MediaInfo].[MediaContact] AS [MediaContact], 
+    [MediaInfo].[Remarks] AS [Remarks]
+    FROM [dbo].[MediaInfo] AS [MediaInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Module" EntityType="Self.Module" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Module].[ID] AS [ID], 
+    [Module].[ModuleName] AS [ModuleName], 
+    [Module].[ModuleCode] AS [ModuleCode], 
+    [Module].[ModuleType] AS [ModuleType], 
+    [Module].[ModulePicUrl] AS [ModulePicUrl], 
+    [Module].[ModuleUrl] AS [ModuleUrl], 
+    [Module].[IfEffective] AS [IfEffective]
+    FROM [dbo].[Module] AS [Module]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Notice" EntityType="Self.Notice" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Notice].[ID] AS [ID], 
+    [Notice].[Notice_Title] AS [Notice_Title], 
+    [Notice].[Notice_Content] AS [Notice_Content], 
+    [Notice].[Notice_ImportDate] AS [Notice_ImportDate], 
+    [Notice].[Notice_Opr] AS [Notice_Opr], 
+    [Notice].[IfDel] AS [IfDel]
+    FROM [dbo].[Notice] AS [Notice]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PZDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bf_MemberInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="MemberInfoCode" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="MemberName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="EnglishName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="PYIndex" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="MemberInfoClassID" Type="Int32" />
+          <Property Name="VIP" Type="Int32" />
+          <Property Name="Sex" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="IDCard" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="CheckAddress1" Type="Boolean" />
+          <Property Name="CheckAddress2" Type="Boolean" />
+          <Property Name="Postalcode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Postalcode2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Mobilephone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="wiki_UserCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Officephone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="LikeInceptNote" Type="Boolean" />
+          <Property Name="LikeInceptEmail" Type="Boolean" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="FrameID" Type="Int32" />
+          <Property Name="CreateFrameID" Type="Int32" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="RefDate" Type="DateTime" Precision="3" />
+          <Property Name="BuyerDate" Type="DateTime" Precision="3" />
+          <Property Name="MemberDate" Type="DateTime" Precision="3" />
+          <Property Name="ExteriorID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="LockFlag" Type="Boolean" />
+          <Property Name="CreateID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyID" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ImportFlag" Type="Int32" />
+          <Property Name="ExportFlag" Type="Int32" />
+          <Property Name="DelFlag" Type="Boolean" />
+          <Property Name="HQFlag" Type="Int32" />
+          <Property Name="StoFlag" Type="Int32" />
+          <Property Name="jobs" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="titles" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AccountSum" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PointSum" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="bf_wiki_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="FromUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ToUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MsgType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Recognition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GetTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Adv_Code" />
+            <PropertyRef Name="Adv_Name" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Adv_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adv_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adv_Script" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_Title" />
+            <PropertyRef Name="Article_Type" />
+            <PropertyRef Name="Article_ImportDate" />
+            <PropertyRef Name="Article_CreateDate" />
+            <PropertyRef Name="Article_Opr" />
+            <PropertyRef Name="IfDel" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Article_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Article_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Article_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Article_ImportDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Article_Pseudonym" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Article_CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Article_MediaUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Article_Opr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IfContributor" Type="Boolean" />
+          <Property Name="IfDel" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleComment">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_ID" />
+            <PropertyRef Name="IpAddress" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="ImputDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Article_ID" Type="Int32" Nullable="false" />
+          <Property Name="Signed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IpAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ImputDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ArticleContributor">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_ID" />
+            <PropertyRef Name="MediaCode" />
+            <PropertyRef Name="ContributorDate" />
+            <PropertyRef Name="ContributorType" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Article_ID" Type="Int32" Nullable="false" />
+          <Property Name="MediaCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContributorDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContributorType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Results" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ArticleType">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Article_Type" />
+            <PropertyRef Name="Article_TypeName" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Article_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Article_TypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competence">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RoleCode" />
+            <PropertyRef Name="ModuleCode" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModuleCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuestMsg">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Signed" />
+            <PropertyRef Name="IPAddress" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="ImputDate" />
+            <PropertyRef Name="IfOpen" />
+            <PropertyRef Name="Ifshield" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Signed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ImputDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IfOpen" Type="Boolean" Nullable="false" />
+          <Property Name="Ifshield" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="MediaCode" />
+            <PropertyRef Name="MediaName" />
+            <PropertyRef Name="MediaContact" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="MediaCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MediaName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MediaContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ModuleName" />
+            <PropertyRef Name="ModuleCode" />
+            <PropertyRef Name="ModuleType" />
+            <PropertyRef Name="IfEffective" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ModuleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModuleCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModuleType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModulePicUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IfEffective" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Notice_Title" />
+            <PropertyRef Name="Notice_ImportDate" />
+            <PropertyRef Name="Notice_Opr" />
+            <PropertyRef Name="IfDel" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Notice_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Notice_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notice_ImportDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Notice_Opr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IfDel" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PZDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bf_MemberInfo" EntityType="Self.bf_MemberInfo" />
+          <EntitySet Name="bf_wiki_Message" EntityType="Self.bf_wiki_Message" />
+          <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="ArticleComments" EntityType="Self.ArticleComment" />
+          <EntitySet Name="ArticleContributors" EntityType="Self.ArticleContributor" />
+          <EntitySet Name="ArticleTypes" EntityType="Self.ArticleType" />
+          <EntitySet Name="Competences" EntityType="Self.Competence" />
+          <EntitySet Name="GuestMsgs" EntityType="Self.GuestMsg" />
+          <EntitySet Name="MediaInfoes" EntityType="Self.MediaInfo" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Notices" EntityType="Self.Notice" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PZDBModelStoreContainer" CdmEntityContainer="PZDBEntities">
+          <EntitySetMapping Name="bf_MemberInfo">
+            <EntityTypeMapping TypeName="PZDBModel.bf_MemberInfo">
+              <MappingFragment StoreEntitySet="bf_MemberInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberInfoCode" ColumnName="MemberInfoCode" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="EnglishName" ColumnName="EnglishName" />
+                <ScalarProperty Name="PYIndex" ColumnName="PYIndex" />
+                <ScalarProperty Name="MemberInfoClassID" ColumnName="MemberInfoClassID" />
+                <ScalarProperty Name="VIP" ColumnName="VIP" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="CheckAddress1" ColumnName="CheckAddress1" />
+                <ScalarProperty Name="CheckAddress2" ColumnName="CheckAddress2" />
+                <ScalarProperty Name="Postalcode" ColumnName="Postalcode" />
+                <ScalarProperty Name="Postalcode2" ColumnName="Postalcode2" />
+                <ScalarProperty Name="Mobilephone" ColumnName="Mobilephone" />
+                <ScalarProperty Name="wiki_UserCode" ColumnName="wiki_UserCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Officephone" ColumnName="Officephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="LikeInceptNote" ColumnName="LikeInceptNote" />
+                <ScalarProperty Name="LikeInceptEmail" ColumnName="LikeInceptEmail" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FrameID" ColumnName="FrameID" />
+                <ScalarProperty Name="CreateFrameID" ColumnName="CreateFrameID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+                <ScalarProperty Name="BuyerDate" ColumnName="BuyerDate" />
+                <ScalarProperty Name="MemberDate" ColumnName="MemberDate" />
+                <ScalarProperty Name="ExteriorID" ColumnName="ExteriorID" />
+                <ScalarProperty Name="LockFlag" ColumnName="LockFlag" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyID" ColumnName="ModifyID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ImportFlag" ColumnName="ImportFlag" />
+                <ScalarProperty Name="ExportFlag" ColumnName="ExportFlag" />
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+                <ScalarProperty Name="HQFlag" ColumnName="HQFlag" />
+                <ScalarProperty Name="StoFlag" ColumnName="StoFlag" />
+                <ScalarProperty Name="jobs" ColumnName="jobs" />
+                <ScalarProperty Name="titles" ColumnName="titles" />
+                <ScalarProperty Name="AccountSum" ColumnName="AccountSum" />
+                <ScalarProperty Name="PointSum" ColumnName="PointSum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bf_wiki_Message">
+            <EntityTypeMapping TypeName="PZDBModel.bf_wiki_Message">
+              <MappingFragment StoreEntitySet="bf_wiki_Message">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FromUserName" ColumnName="FromUserName" />
+                <ScalarProperty Name="ToUserName" ColumnName="ToUserName" />
+                <ScalarProperty Name="MsgType" ColumnName="MsgType" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Recognition" ColumnName="Recognition" />
+                <ScalarProperty Name="EventKey" ColumnName="EventKey" />
+                <ScalarProperty Name="GetTime" ColumnName="GetTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advertisements">
+            <EntityTypeMapping TypeName="PZDBModel.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Adv_Code" ColumnName="Adv_Code" />
+                <ScalarProperty Name="Adv_Name" ColumnName="Adv_Name" />
+                <ScalarProperty Name="Adv_Script" ColumnName="Adv_Script" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="PZDBModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Article_Title" ColumnName="Article_Title" />
+                <ScalarProperty Name="Article_Content" ColumnName="Article_Content" />
+                <ScalarProperty Name="Article_Type" ColumnName="Article_Type" />
+                <ScalarProperty Name="Article_ImportDate" ColumnName="Article_ImportDate" />
+                <ScalarProperty Name="Article_Pseudonym" ColumnName="Article_Pseudonym" />
+                <ScalarProperty Name="Article_CreateDate" ColumnName="Article_CreateDate" />
+                <ScalarProperty Name="Article_MediaUrl" ColumnName="Article_MediaUrl" />
+                <ScalarProperty Name="Article_Opr" ColumnName="Article_Opr" />
+                <ScalarProperty Name="IfContributor" ColumnName="IfContributor" />
+                <ScalarProperty Name="IfDel" ColumnName="IfDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleComments">
+            <EntityTypeMapping TypeName="PZDBModel.ArticleComment">
+              <MappingFragment StoreEntitySet="ArticleComments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Article_ID" ColumnName="Article_ID" />
+                <ScalarProperty Name="Signed" ColumnName="Signed" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="ImputDate" ColumnName="ImputDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleContributors">
+            <EntityTypeMapping TypeName="PZDBModel.ArticleContributor">
+              <MappingFragment StoreEntitySet="ArticleContributor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Article_ID" ColumnName="Article_ID" />
+                <ScalarProperty Name="MediaCode" ColumnName="MediaCode" />
+                <ScalarProperty Name="ContributorDate" ColumnName="ContributorDate" />
+                <ScalarProperty Name="ContributorType" ColumnName="ContributorType" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleTypes">
+            <EntityTypeMapping TypeName="PZDBModel.ArticleType">
+              <MappingFragment StoreEntitySet="ArticleType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Article_Type" ColumnName="Article_Type" />
+                <ScalarProperty Name="Article_TypeName" ColumnName="Article_TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competences">
+            <EntityTypeMapping TypeName="PZDBModel.Competence">
+              <MappingFragment StoreEntitySet="Competence">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestMsgs">
+            <EntityTypeMapping TypeName="PZDBModel.GuestMsg">
+              <MappingFragment StoreEntitySet="GuestMsg">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Signed" ColumnName="Signed" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="ImputDate" ColumnName="ImputDate" />
+                <ScalarProperty Name="IfOpen" ColumnName="IfOpen" />
+                <ScalarProperty Name="Ifshield" ColumnName="Ifshield" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaInfoes">
+            <EntityTypeMapping TypeName="PZDBModel.MediaInfo">
+              <MappingFragment StoreEntitySet="MediaInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaCode" ColumnName="MediaCode" />
+                <ScalarProperty Name="MediaName" ColumnName="MediaName" />
+                <ScalarProperty Name="MediaContact" ColumnName="MediaContact" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="PZDBModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
+                <ScalarProperty Name="ModuleType" ColumnName="ModuleType" />
+                <ScalarProperty Name="ModulePicUrl" ColumnName="ModulePicUrl" />
+                <ScalarProperty Name="ModuleUrl" ColumnName="ModuleUrl" />
+                <ScalarProperty Name="IfEffective" ColumnName="IfEffective" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notices">
+            <EntityTypeMapping TypeName="PZDBModel.Notice">
+              <MappingFragment StoreEntitySet="Notice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Notice_Title" ColumnName="Notice_Title" />
+                <ScalarProperty Name="Notice_Content" ColumnName="Notice_Content" />
+                <ScalarProperty Name="Notice_ImportDate" ColumnName="Notice_ImportDate" />
+                <ScalarProperty Name="Notice_Opr" ColumnName="Notice_Opr" />
+                <ScalarProperty Name="IfDel" ColumnName="IfDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="なし" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

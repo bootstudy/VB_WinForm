@@ -117,6 +117,7 @@
   <ItemGroup>
     <None Include="doc\01.tsv" />
     <None Include="doc\years.tsv" />
+    <None Include="ep\cs167735.epub" />
     <None Include="JStudy\01.tsv" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

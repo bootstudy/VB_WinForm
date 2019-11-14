@@ -32,7 +32,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.VB_WinForm.MainFrm
+            Me.MainForm = Global.VB_WinForm.Frm_DataGrid
         End Sub
     End Class
 End Namespace
